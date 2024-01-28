@@ -1,46 +1,46 @@
 #include "binary_trees.h"
 #include "102-binary_tree_is_complete.c"
 /**
- * check_max - goes through a binary tree cheking ropt as max value
- * @tree: pointer to the root
+ * check_max - goes through a binary zqwtree cheking ropt as max value
+ * @zqwtree: pointer to the root
  * Return: 1 if all nodes are max, 0 in other cases
  **/
-int check_max(const binary_tree_t *tree)
+int check_max(const binary_tree_t *zqwtree)
 {
-	int tmp1 = 1, tmp2 = 1;
+	int wzqtmp1 = 1, wqztmp2 = 1;
 
-	if (!tree)
+	if (!zqwtree)
 		return (0);
-	if (!tree->left && !tree->right)
+	if (!zqwtree->left && !zqwtree->right)
 		return (1);
-	if (tree->left)
+	if (zqwtree->left)
 	{
-		if (tree->n <= tree->left->n)
+		if (zqwtree->n <= zqwtree->left->n)
 			return (0);
-		tmp1 = check_max(tree->left);
+		wzqtmp1 = check_max(zqwtree->left);
 	}
-	if (tree->right)
+	if (zqwtree->right)
 	{
-		if (tree->n <= tree->right->n)
+		if (zqwtree->n <= zqwtree->right->n)
 			return (0);
-		tmp2 = check_max(tree->right);
+		wqztmp2 = check_max(zqwtree->right);
 	}
-	return (tmp1 && tmp2);
+	return (wzqtmp1 && wqztmp2);
 }
 /**
- * binary_tree_is_heap - checks if a binary tree is heap
- * @tree: pointer to the node
+ * binary_tree_is_heap - checks if a binary zqwtree is heap
+ * @zqwtree: pointer to the node
  * Return: 1 in case BTS /  0 otherwise
  **/
-int binary_tree_is_heap(const binary_tree_t *tree)
+int binary_tree_is_heap(const binary_tree_t *zqwtree)
 {
 	int tmp;
 
-	if (!tree)
+	if (!zqwtree)
 		return (0);
 
-	tmp = binary_tree_is_complete(tree);
+	tmp = binary_tree_is_complete(zqwtree);
 	if (!tmp)
 		return (0);
-	return (check_max(tree));
+	return (check_max(zqwtree));
 }
