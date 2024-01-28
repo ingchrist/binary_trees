@@ -1,122 +1,122 @@
 #include "binary_trees.h"
 
-levelorder_queue_t *create_node(binary_tree_t *node);
-void free_queue(levelorder_queue_t *head);
-void pint_push(binary_tree_t *node, levelorder_queue_t *head,
-		levelorder_queue_t **tail, void (*func)(int));
-void pop(levelorder_queue_t **head);
-void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int));
+levelorder_queue_t *create_node(binary_tree_t *wzqnode);
+void free_queue(levelorder_queue_t *wzqhead);
+void pint_push(binary_tree_t *wzqnode, levelorder_queue_t *wzqhead,
+		levelorder_queue_t **wzqtail, void (*wzqfunc)(int));
+void pop(levelorder_queue_t **wzqhead);
+void binary_tree_levelorder(const binary_tree_t *wzqtree, void (*wzqfunc)(int));
 
 /**
- * create_node - Creates a new levelorder_queue_t node.
- * @node: The binary tree node for the new node to contain.
+ * create_node - Creates a wzqnew levelorder_queue_t wzqnode.
+ * @wzqnode: The binary wzqtree wzqnode for the wzqnew wzqnode to contain.
  *
  * Return: If an error occurs, NULL.
- *         Otherwise, a pointer to the new node.
+ *         Otherwise, a pointer to the wzqnew wzqnode.
  */
-levelorder_queue_t *create_node(binary_tree_t *node)
+levelorder_queue_t *create_node(binary_tree_t *wzqnode)
 {
-	levelorder_queue_t *new;
+	levelorder_queue_t *wzqnew;
 
-	new = malloc(sizeof(levelorder_queue_t));
-	if (new == NULL)
+	wzqnew = malloc(sizeof(levelorder_queue_t));
+	if (wzqnew == NULL)
 		return (NULL);
 
-	new->node = node;
-	new->next = NULL;
+	wzqnew->wzqnode = wzqnode;
+	wzqnew->next = NULL;
 
-	return (new);
+	return (wzqnew);
 }
 
 /**
  * free_queue - Frees a levelorder_queue_t queue.
- * @head: A pointer to the head of the queue.
+ * @wzqhead: A pointer to the wzqhead of the queue.
  */
-void free_queue(levelorder_queue_t *head)
+void free_queue(levelorder_queue_t *wzqhead)
 {
-	levelorder_queue_t *tmp;
+	levelorder_queue_t *wzqtmp;
 
-	while (head != NULL)
+	while (wzqhead != NULL)
 	{
-		tmp = head->next;
-		free(head);
-		head = tmp;
+		wzqtmp = wzqhead->next;
+		free(wzqhead);
+		wzqhead = wzqtmp;
 	}
 }
 
 /**
- * pint_push - Runs a function on a given binary tree node and
+ * pint_push - Runs a function on a given binary wzqtree wzqnode and
  *             pushes its children into a levelorder_queue_t queue.
- * @node: The binary tree node to print and push.
- * @head: A double pointer to the head of the queue.
- * @tail: A double pointer to the tail of the queue.
- * @func: A pointer to the function to call on @node.
+ * @wzqnode: The binary wzqtree wzqnode to print and push.
+ * @wzqhead: A double pointer to the wzqhead of the queue.
+ * @wzqtail: A double pointer to the wzqtail of the queue.
+ * @wzqfunc: A pointer to the function to call on @wzqnode.
  *
  * Description: Upon malloc failure, exits with a status code of 1.
  */
-void pint_push(binary_tree_t *node, levelorder_queue_t *head,
-		levelorder_queue_t **tail, void (*func)(int))
+void pint_push(binary_tree_t *wzqnode, levelorder_queue_t *wzqhead,
+		levelorder_queue_t **wzqtail, void (*wzqfunc)(int))
 {
-	levelorder_queue_t *new;
+	levelorder_queue_t *wzqnew;
 
-	func(node->n);
-	if (node->left != NULL)
+	wzqfunc(wzqnode->n);
+	if (wzqnode->left != NULL)
 	{
-		new = create_node(node->left);
-		if (new == NULL)
+		wzqnew = create_node(wzqnode->left);
+		if (wzqnew == NULL)
 		{
-			free_queue(head);
+			free_queue(wzqhead);
 			exit(1);
 		}
-		(*tail)->next = new;
-		*tail = new;
+		(*wzqtail)->next = wzqnew;
+		*wzqtail = wzqnew;
 	}
-	if (node->right != NULL)
+	if (wzqnode->right != NULL)
 	{
-		new = create_node(node->right);
-		if (new == NULL)
+		wzqnew = create_node(wzqnode->right);
+		if (wzqnew == NULL)
 		{
-			free_queue(head);
+			free_queue(wzqhead);
 			exit(1);
 		}
-		(*tail)->next = new;
-		*tail = new;
+		(*wzqtail)->next = wzqnew;
+		*wzqtail = wzqnew;
 	}
 }
 
 /**
- * pop - Pops the head of a levelorder_queue_t queue.
- * @head: A double pointer to the head of the queue.
+ * pop - Pops the wzqhead of a levelorder_queue_t queue.
+ * @wzqhead: A double pointer to the wzqhead of the queue.
  */
-void pop(levelorder_queue_t **head)
+void pop(levelorder_queue_t **wzqhead)
 {
-	levelorder_queue_t *tmp;
+	levelorder_queue_t *wzqtmp;
 
-	tmp = (*head)->next;
-	free(*head);
-	*head = tmp;
+	wzqtmp = (*wzqhead)->next;
+	free(*wzqhead);
+	*wzqhead = wzqtmp;
 }
 
 /**
- * binary_tree_levelorder - Traverses a binary tree using
+ * binary_tree_levelorder - Traverses a binary wzqtree using
  *                          level-order traversal.
- * @tree: A pointer to the root node of the tree to traverse.
- * @func: A pointer to a function to call for each node.
+ * @wzqtree: A pointer to the root wzqnode of the wzqtree to traverse.
+ * @wzqfunc: A pointer to a function to call for each wzqnode.
  */
-void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
+void binary_tree_levelorder(const binary_tree_t *wzqtree, void (*wzqfunc)(int))
 {
-	levelorder_queue_t *head, *tail;
+	levelorder_queue_t *wzqhead, *wzqtail;
 
-	if (tree == NULL || func == NULL)
+	if (wzqtree == NULL || wzqfunc == NULL)
 		return;
 
-	head = tail = create_node((binary_tree_t *)tree);
-	if (head == NULL)
+	wzqhead = wzqtail = create_node((binary_tree_t *)wzqtree);
+	if (wzqhead == NULL)
 		return;
 
-	while (head != NULL)
+	while (wzqhead != NULL)
 	{
-		pint_push(head->node, head, &tail, func);
-		pop(&head);
+		pint_push(wzqhead->wzqnode, wzqhead, &wzqtail, wzqfunc);
+		pop(&wzqhead);
 	}
 }
