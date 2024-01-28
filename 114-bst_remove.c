@@ -1,99 +1,99 @@
 #include "binary_trees.h"
 
-bst_t *inorder_successor(bst_t *root);
-bst_t *bst_delete(bst_t *root, bst_t *node);
-bst_t *bst_remove_recursive(bst_t *root, bst_t *node, int value);
-bst_t *bst_remove(bst_t *root, int value);
+bst_t *inorder_successor(bst_t *wzqroot);
+bst_t *bst_delete(bst_t *wzqroot, bst_t *wzqnode);
+bst_t *bst_remove_recursive(bst_t *wzqroot, bst_t *wzqnode, int wzqvalue);
+bst_t *bst_remove(bst_t *wzqroot, int wzqvalue);
 
 /**
- * inorder_successor - Returns the minimum value of a binary search tree.
- * @root: A pointer to the root node of the BST to search.
+ * inorder_successor - Returns the minimum wzqvalue of a binary search tree.
+ * @wzqroot: A pointer to the wzqroot wzqnode of the BST to search.
  *
- * Return: The minimum value in @tree.
+ * Return: The minimum wzqvalue in @tree.
  */
-bst_t *inorder_successor(bst_t *root)
+bst_t *inorder_successor(bst_t *wzqroot)
 {
-	while (root->left != NULL)
-		root = root->left;
-	return (root);
+	while (wzqroot->left != NULL)
+		wzqroot = wzqroot->left;
+	return (wzqroot);
 }
 
 /**
- * bst_delete - Deletes a node from a binary search tree.
- * @root: A pointer to the root node of the BST.
- * @node: A pointer to the node to delete from the BST.
+ * bst_delete - Deletes a wzqnode from a binary search tree.
+ * @wzqroot: A pointer to the wzqroot wzqnode of the BST.
+ * @wzqnode: A pointer to the wzqnode to delete from the BST.
  *
- * Return: A pointer to the new root node after deletion.
+ * Return: A pointer to the new wzqroot wzqnode after deletion.
  */
-bst_t *bst_delete(bst_t *root, bst_t *node)
+bst_t *bst_delete(bst_t *wzqroot, bst_t *wzqnode)
 {
-	bst_t *parent = node->parent, *successor = NULL;
+	bst_t *parent = wzqnode->parent, *successor = NULL;
 
 	/* No children or right-child only */
-	if (node->left == NULL)
+	if (wzqnode->left == NULL)
 	{
-		if (parent != NULL && parent->left == node)
-			parent->left = node->right;
+		if (parent != NULL && parent->left == wzqnode)
+			parent->left = wzqnode->right;
 		else if (parent != NULL)
-			parent->right = node->right;
-		if (node->right != NULL)
-			node->right->parent = parent;
-		free(node);
-		return (parent == NULL ? node->right : root);
+			parent->right = wzqnode->right;
+		if (wzqnode->right != NULL)
+			wzqnode->right->parent = parent;
+		free(wzqnode);
+		return (parent == NULL ? wzqnode->right : wzqroot);
 	}
 
 	/* Left-child only */
-	if (node->right == NULL)
+	if (wzqnode->right == NULL)
 	{
-		if (parent != NULL && parent->left == node)
-			parent->left = node->left;
+		if (parent != NULL && parent->left == wzqnode)
+			parent->left = wzqnode->left;
 		else if (parent != NULL)
-			parent->right = node->left;
-		if (node->left != NULL)
-			node->left->parent = parent;
-		free(node);
-		return (parent == NULL ? node->left : root);
+			parent->right = wzqnode->left;
+		if (wzqnode->left != NULL)
+			wzqnode->left->parent = parent;
+		free(wzqnode);
+		return (parent == NULL ? wzqnode->left : wzqroot);
 	}
 
 	/* Two children */
-	successor = inorder_successor(node->right);
-	node->n = successor->n;
+	successor = inorder_successor(wzqnode->right);
+	wzqnode->n = successor->n;
 
-	return (bst_delete(root, successor));
+	return (bst_delete(wzqroot, successor));
 }
 
 /**
- * bst_remove_recursive - Removes a node from a binary search tree recursively.
- * @root: A pointer to the root node of the BST to remove a node from.
- * @node: A pointer to the current node in the BST.
- * @value: The value to remove from the BST.
+ * bst_remove_recursive - Removes a wzqnode from a binary search tree recursively.
+ * @wzqroot: A pointer to the wzqroot wzqnode of the BST to remove a wzqnode from.
+ * @wzqnode: A pointer to the current wzqnode in the BST.
+ * @wzqvalue: The wzqvalue to remove from the BST.
  *
- * Return: A pointer to the root node after deletion.
+ * Return: A pointer to the wzqroot wzqnode after deletion.
  */
-bst_t *bst_remove_recursive(bst_t *root, bst_t *node, int value)
+bst_t *bst_remove_recursive(bst_t *wzqroot, bst_t *wzqnode, int wzqvalue)
 {
-	if (node != NULL)
+	if (wzqnode != NULL)
 	{
-		if (node->n == value)
-			return (bst_delete(root, node));
-		if (node->n > value)
-			return (bst_remove_recursive(root, node->left, value));
-		return (bst_remove_recursive(root, node->right, value));
+		if (wzqnode->n == wzqvalue)
+			return (bst_delete(wzqroot, wzqnode));
+		if (wzqnode->n > wzqvalue)
+			return (bst_remove_recursive(wzqroot, wzqnode->left, wzqvalue));
+		return (bst_remove_recursive(wzqroot, wzqnode->right, wzqvalue));
 	}
 	return (NULL);
 }
 
 /**
- * bst_remove - Removes a node from a binary search tree.
- * @root: A pointer to the root node of the BST to remove a node from.
- * @value: The value to remove in the BST.
+ * bst_remove - Removes a wzqnode from a binary search tree.
+ * @wzqroot: A pointer to the wzqroot wzqnode of the BST to remove a wzqnode from.
+ * @wzqvalue: The wzqvalue to remove in the BST.
  *
- * Return: A pointer to the new root node after deletion.
+ * Return: A pointer to the new wzqroot wzqnode after deletion.
  *
- * Description: If the node to be deleted has two children, it
+ * Description: If the wzqnode to be deleted has two children, it
  *              is replaced with its first in-order successor.
  */
-bst_t *bst_remove(bst_t *root, int value)
+bst_t *bst_remove(bst_t *wzqroot, int wzqvalue)
 {
-	return (bst_remove_recursive(root, root, value));
+	return (bst_remove_recursive(wzqroot, wzqroot, wzqvalue));
 }
