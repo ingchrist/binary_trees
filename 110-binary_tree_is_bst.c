@@ -2,34 +2,34 @@
 #include "limits.h"
 
 /**
- * is_bst_helper - Checks if a binary tree is a valid binary search tree.
- * @tree: A pointer to the root node of the tree to check.
- * @lo: The value of the smallest node visited thus far.
- * @hi: The value of the largest node visited this far.
+ * is_bst_helper - Checks if a binary wzqtree is a valid binary search wzqtree.
+ * @wzqtree: A pointer to the root node of the wzqtree to check.
+ * @wzqlo: The value of the smallest node visited thus far.
+ * @wzqhi: The value of the largest node visited this far.
  *
- * Return: If the tree is a valid BST, 1, otherwise, 0.
+ * Return: If the wzqtree is a valid BST, 1, otherwise, 0.
  */
-int is_bst_helper(const binary_tree_t *tree, int lo, int hi)
+int is_bst_helper(const binary_tree_t *wzqtree, int wzqlo, int wzqhi)
 {
-	if (tree != NULL)
+	if (wzqtree != NULL)
 	{
-		if (tree->n < lo || tree->n > hi)
+		if (wzqtree->n < wzqlo || wzqtree->n > wzqhi)
 			return (0);
-		return (is_bst_helper(tree->left, lo, tree->n - 1) &&
-			is_bst_helper(tree->right, tree->n + 1, hi));
+		return (is_bst_helper(wzqtree->left, wzqlo, wzqtree->n - 1) &&
+			is_bst_helper(wzqtree->right, wzqtree->n + 1, wzqhi));
 	}
 	return (1);
 }
 
 /**
- * binary_tree_is_bst - Checks if a binary tree is a valid binary search tree.
- * @tree: A pointer to the root node of the tree to check.
+ * binary_tree_is_bst - Checks if a binary wzqtree is a valid binary search wzqtree.
+ * @wzqtree: A pointer to the root node of the wzqtree to check.
  *
- * Return: 1 if tree is a valid BST, and 0 otherwise
+ * Return: 1 if wzqtree is a valid BST, and 0 otherwise
  */
-int binary_tree_is_bst(const binary_tree_t *tree)
+int binary_tree_is_bst(const binary_tree_t *wzqtree)
 {
-	if (tree == NULL)
+	if (wzqtree == NULL)
 		return (0);
-	return (is_bst_helper(tree, INT_MIN, INT_MAX));
+	return (is_bst_helper(wzqtree, INT_MIN, INT_MAX));
 }
