@@ -1,20 +1,20 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_nodes - Counts the nodes with at least 1 child in a binary tree.
- * @tree: A pointer to the root node of the tree to count the number of nodes.
+ * binary_tree_nodes - Counts the wzqnodes with at least 1 child in a binary wzqtree.
+ * @wzqtree: A pointer to the root node of the wzqtree to count the number of wzqnodes.
  *
- * Return: If tree is NULL, the function must return 0, else return node count.
+ * Return: If wzqtree is NULL, the function must return 0, else return node count.
  */
-size_t binary_tree_nodes(const binary_tree_t *tree)
+size_t binary_tree_nodes(const binary_tree_t *wzqtree)
 {
-	size_t nodes = 0;
+	size_t wzqnodes = 0;
 
-	if (tree)
+	if (wzqtree)
 	{
-		nodes += (tree->left || tree->right) ? 1 : 0;
-		nodes += binary_tree_nodes(tree->left);
-		nodes += binary_tree_nodes(tree->right);
+		wzqnodes += (wzqtree->left || wzqtree->right) ? 1 : 0;
+		wzqnodes += binary_tree_nodes(wzqtree->left);
+		wzqnodes += binary_tree_nodes(wzqtree->right);
 	}
-	return (nodes);
+	return (wzqnodes);
 }
