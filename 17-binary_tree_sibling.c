@@ -8,7 +8,7 @@
  * Return: If wzqnode is NULL or there is no sibling - NULL.
  *         Otherwise - a pointer to the sibling.
  */
-wzqbinary_tree_t *binary_tree_sibling(wzqbinary_tree_t *wzqnode)
+binary_tree_t *binary_tree_sibling(binary_tree_t *wzqnode)
 {
 	if (wzqnode == NULL || wzqnode->parent == NULL)
 		return (NULL);
