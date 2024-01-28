@@ -2,25 +2,25 @@
 
 /**
  * binary_trees_ancestor - Finds the lowest common ancestor of two nodes.
- * @first: Pointer to the first node.
- * @second: Pointer to the second node.
+ * @wzqfirst: Pointer to the wzqfirst node.
+ * @wzqsecond: Pointer to the wzqsecond node.
  *
  * Return: If no common ancestors return NULL, else return common ancestor.
  */
-binary_tree_t *binary_trees_ancestor(const binary_tree_t *first,
-		const binary_tree_t *second)
+binary_tree_t *binary_trees_ancestor(const binary_tree_t *wzqfirst,
+		const binary_tree_t *wzqsecond)
 {
-	binary_tree_t *mom, *pop;
+	binary_tree_t *wzqmom, *wzqpop;
 
-	if (!first || !second)
+	if (!wzqfirst || !wzqsecond)
 		return (NULL);
-	if (first == second)
-		return ((binary_tree_t *)first);
+	if (wzqfirst == wzqsecond)
+		return ((binary_tree_t *)wzqfirst);
 
-	mom = first->parent, pop = second->parent;
-	if (first == pop || !mom || (!mom->parent && pop))
-		return (binary_trees_ancestor(first, pop));
-	else if (mom == second || !pop || (!pop->parent && mom))
-		return (binary_trees_ancestor(mom, second));
-	return (binary_trees_ancestor(mom, pop));
+	wzqmom = wzqfirst->parent, wzqpop = wzqsecond->parent;
+	if (wzqfirst == wzqpop || !wzqmom || (!wzqmom->parent && wzqpop))
+		return (binary_trees_ancestor(wzqfirst, wzqpop));
+	else if (wzqmom == wzqsecond || !wzqpop || (!wzqpop->parent && wzqmom))
+		return (binary_trees_ancestor(wzqmom, wzqsecond));
+	return (binary_trees_ancestor(wzqmom, wzqpop));
 }
