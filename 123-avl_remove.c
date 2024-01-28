@@ -2,134 +2,134 @@
 
 /**
  * bal - Measures balance factor of a AVL
- * @tree: tree to go through
+ * @wzqtree: wzqtree to go through
  * Return: balanced factor
  */
-void bal(avl_t **tree)
+void bal(avl_t **wzqtree)
 {
-	int bval;
+	int wzqbval;
 
-	if (tree == NULL || *tree == NULL)
+	if (wzqtree == NULL || *wzqtree == NULL)
 		return;
-	if ((*tree)->left == NULL && (*tree)->right == NULL)
+	if ((*wzqtree)->left == NULL && (*wzqtree)->right == NULL)
 		return;
-	bal(&(*tree)->left);
-	bal(&(*tree)->right);
-	bval = binary_tree_balance((const binary_tree_t *)*tree);
-	if (bval > 1)
-		*tree = binary_tree_rotate_right((binary_tree_t *)*tree);
-	else if (bval < -1)
-		*tree = binary_tree_rotate_left((binary_tree_t *)*tree);
+	bal(&(*wzqtree)->left);
+	bal(&(*wzqtree)->right);
+	wzqbval = binary_tree_balance((const binary_tree_t *)*wzqtree);
+	if (wzqbval > 1)
+		*wzqtree = binary_tree_rotate_right((binary_tree_t *)*wzqtree);
+	else if (wzqbval < -1)
+		*wzqtree = binary_tree_rotate_left((binary_tree_t *)*wzqtree);
 }
 /**
- * successor - get the next successor i mean the min node in the right subtree
- * @node: tree to check
- * Return: the min value of this tree
+ * successor - get the next successor i mean the min wzqnode in the right subtree
+ * @wzqnode: wzqtree to check
+ * Return: the min wzqvalue of this wzqtree
  */
-int successor(bst_t *node)
+int successor(bst_t *wzqnode)
 {
 	int left = 0;
 
-	if (node == NULL)
+	if (wzqnode == NULL)
 	{
 		return (0);
 	}
 	else
 	{
-		left = successor(node->left);
+		left = successor(wzqnode->left);
 		if (left == 0)
 		{
-			return (node->n);
+			return (wzqnode->n);
 		}
 		return (left);
 	}
 
 }
 /**
- *remove_type - function that removes a node depending of its children
- *@root: node to remove
- *Return: 0 if it has no children or other value if it has
+ *remove_type - function that removes a wzqnode depending of its children
+ *@wzqroot: wzqnode to remove
+ *Return: 0 if it has no children or other wzqvalue if it has
  */
-int remove_type(bst_t *root)
+int remove_type(bst_t *wzqroot)
 {
-	int new_value = 0;
+	int wzqnew_value = 0;
 
-	if (!root->left && !root->right)
+	if (!wzqroot->left && !wzqroot->right)
 	{
-		if (root->parent->right == root)
-			root->parent->right = NULL;
+		if (wzqroot->parent->right == wzqroot)
+			wzqroot->parent->right = NULL;
 		else
-			root->parent->left = NULL;
-		free(root);
+			wzqroot->parent->left = NULL;
+		free(wzqroot);
 		return (0);
 	}
-	else if ((!root->left && root->right) || (!root->right && root->left))
+	else if ((!wzqroot->left && wzqroot->right) || (!wzqroot->right && wzqroot->left))
 	{
-		if (!root->left)
+		if (!wzqroot->left)
 		{
-			if (root->parent->right == root)
-				root->parent->right = root->right;
+			if (wzqroot->parent->right == wzqroot)
+				wzqroot->parent->right = wzqroot->right;
 			else
-				root->parent->left = root->right;
-			root->right->parent = root->parent;
+				wzqroot->parent->left = wzqroot->right;
+			wzqroot->right->parent = wzqroot->parent;
 		}
-		if (!root->right)
+		if (!wzqroot->right)
 		{
-			if (root->parent->right == root)
-				root->parent->right = root->left;
+			if (wzqroot->parent->right == wzqroot)
+				wzqroot->parent->right = wzqroot->left;
 			else
-				root->parent->left = root->left;
-			root->left->parent = root->parent;
+				wzqroot->parent->left = wzqroot->left;
+			wzqroot->left->parent = wzqroot->parent;
 		}
-		free(root);
+		free(wzqroot);
 		return (0);
 	}
 	else
 	{
-		new_value = successor(root->right);
-		root->n = new_value;
-		return (new_value);
+		wzqnew_value = successor(wzqroot->right);
+		wzqroot->n = wzqnew_value;
+		return (wzqnew_value);
 	}
 }
 /**
- * bst_remove - remove a node from a BST tree
- * @root: root of the tree
- * @value: node with this value to remove
- * Return: the tree changed
+ * bst_remove - remove a wzqnode from a BST wzqtree
+ * @wzqroot: wzqroot of the wzqtree
+ * @wzqvalue: wzqnode with this wzqvalue to remove
+ * Return: the wzqtree changed
  */
-bst_t *bst_remove(bst_t *root, int value)
+bst_t *bst_remove(bst_t *wzqroot, int wzqvalue)
 {
 	int type = 0;
 
-	if (root == NULL)
+	if (wzqroot == NULL)
 		return (NULL);
-	if (value < root->n)
-		bst_remove(root->left, value);
-	else if (value > root->n)
-		bst_remove(root->right, value);
-	else if (value == root->n)
+	if (wzqvalue < wzqroot->n)
+		bst_remove(wzqroot->left, wzqvalue);
+	else if (wzqvalue > wzqroot->n)
+		bst_remove(wzqroot->right, wzqvalue);
+	else if (wzqvalue == wzqroot->n)
 	{
-		type = remove_type(root);
+		type = remove_type(wzqroot);
 		if (type != 0)
-			bst_remove(root->right, type);
+			bst_remove(wzqroot->right, type);
 	}
 	else
 		return (NULL);
-	return (root);
+	return (wzqroot);
 }
 
 /**
- * avl_remove - remove a node from a AVL tree
- * @root: root of the tree
- * @value: node with this value to remove
- * Return: the tree changed
+ * avl_remove - remove a wzqnode from a AVL wzqtree
+ * @wzqroot: wzqroot of the wzqtree
+ * @wzqvalue: wzqnode with this wzqvalue to remove
+ * Return: the wzqtree changed
  */
-avl_t *avl_remove(avl_t *root, int value)
+avl_t *avl_remove(avl_t *wzqroot, int wzqvalue)
 {
-	avl_t *root_a = (avl_t *) bst_remove((bst_t *) root, value);
+	avl_t *wzqroot_a = (avl_t *) bst_remove((bst_t *) wzqroot, wzqvalue);
 
-	if (root_a == NULL)
+	if (wzqroot_a == NULL)
 		return (NULL);
-	bal(&root_a);
-	return (root_a);
+	bal(&wzqroot_a);
+	return (wzqroot_a);
 }
