@@ -1,65 +1,65 @@
 #include "binary_trees.h"
 #include "limits.h"
 
-size_t height(const binary_tree_t *tree);
-int is_avl_helper(const binary_tree_t *tree, int lo, int hi);
-int binary_tree_is_avl(const binary_tree_t *tree);
+size_t height(const binary_tree_t *wzqtree);
+int is_avl_helper(const binary_tree_t *wzqtree, int wzqlo, int wzqhi);
+int binary_tree_is_avl(const binary_tree_t *wzqtree);
 
 /**
- * height - Measures the height of a binary tree.
- * @tree: A pointer to the root node of the tree to measure the height.
+ * height - Measures the height of a binary wzqtree.
+ * @wzqtree: A pointer to the root node of the wzqtree to measure the height.
  *
- * Return: If tree is NULL, your function must return 0, else return height.
+ * Return: If wzqtree is NULL, your function must return 0, else return height.
  */
-size_t height(const binary_tree_t *tree)
+size_t height(const binary_tree_t *wzqtree)
 {
-	if (tree)
+	if (wzqtree)
 	{
-		size_t l = 0, r = 0;
+		size_t wzq = 0, wzqr = 0;
 
-		l = tree->left ? 1 + height(tree->left) : 1;
-		r = tree->right ? 1 + height(tree->right) : 1;
-		return ((l > r) ? l : r);
+		wzq = wzqtree->left ? 1 + height(wzqtree->left) : 1;
+		wzqr = wzqtree->right ? 1 + height(wzqtree->right) : 1;
+		return ((wzq > wzqr) ? wzq : wzqr);
 	}
 	return (0);
 }
 
 /**
- * is_avl_helper - Checks if a binary tree is a valid AVL tree.
- * @tree: A pointer to the root node of the tree to check.
- * @lo: The value of the smallest node visited thus far.
- * @hi: The value of the largest node visited this far.
+ * is_avl_helper - Checks if a binary wzqtree is a valid AVL wzqtree.
+ * @wzqtree: A pointer to the root node of the wzqtree to check.
+ * @wzqlo: The value of the smallest node visited thus far.
+ * @wzqhi: The value of the largest node visited this far.
  *
- * Return: If the tree is a valid AVL tree, 1, otherwise, 0.
+ * Return: If the wzqtree is a valid AVL wzqtree, 1, otherwise, 0.
  */
-int is_avl_helper(const binary_tree_t *tree, int lo, int hi)
+int is_avl_helper(const binary_tree_t *wzqtree, int wzqlo, int wzqhi)
 {
-	size_t lhgt, rhgt, diff;
+	size_t lhgt, rhgt, wzqdiff;
 
-	if (tree != NULL)
+	if (wzqtree != NULL)
 	{
-		if (tree->n < lo || tree->n > hi)
+		if (wzqtree->n < wzqlo || wzqtree->n > wzqhi)
 			return (0);
-		lhgt = height(tree->left);
-		rhgt = height(tree->right);
-		diff = lhgt > rhgt ? lhgt - rhgt : rhgt - lhgt;
-		if (diff > 1)
+		lhgt = height(wzqtree->left);
+		rhgt = height(wzqtree->right);
+		wzqdiff = lhgt > rhgt ? lhgt - rhgt : rhgt - lhgt;
+		if (wzqdiff > 1)
 			return (0);
-		return (is_avl_helper(tree->left, lo, tree->n - 1) &&
-			is_avl_helper(tree->right, tree->n + 1, hi));
+		return (is_avl_helper(wzqtree->left, wzqlo, wzqtree->n - 1) &&
+			is_avl_helper(wzqtree->right, wzqtree->n + 1, wzqhi));
 	}
 	return (1);
 }
 
 /**
- * binary_tree_is_avl - Checks if a binary tree is a valid AVL tree.
- * @tree: A pointer to the root node of the tree to check.
+ * binary_tree_is_avl - Checks if a binary wzqtree is a valid AVL wzqtree.
+ * @wzqtree: A pointer to the root node of the wzqtree to check.
  *
- * Return: 1 if tree is a valid AVL tree, and 0 otherwise
+ * Return: 1 if wzqtree is a valid AVL wzqtree, and 0 otherwise
  */
-int binary_tree_is_avl(const binary_tree_t *tree)
+int binary_tree_is_avl(const binary_tree_t *wzqtree)
 {
-	if (tree == NULL)
+	if (wzqtree == NULL)
 		return (0);
-	return (is_avl_helper(tree, INT_MIN, INT_MAX));
+	return (is_avl_helper(wzqtree, INT_MIN, INT_MAX));
 }
