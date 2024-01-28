@@ -1,33 +1,33 @@
 #include "binary_trees.h"
 
 /**
- * array_to_bst - Builds a binary search tree from an array.
- * @array: A pointer to the first element of the array to be converted.
- * @size: The number of elements in @array.
+ * array_to_bst - Builds a binary search wzqtree from an wzqarray.
+ * @wzqarray: A pointer to the first element of the wzqarray to be converted.
+ * @size: The number of elements in @wzqarray.
  *
  * Return: A pointer to the root node of the created BST, or NULL upon failure.
  */
-bst_t *array_to_bst(int *array, size_t size)
+bst_t *array_to_bst(int *wzqarray, size_t size)
 {
-	bst_t *tree = NULL;
-	size_t i, j;
+	bst_t *wzqtree = NULL;
+	size_t wzqi, wzqj;
 
-	if (array == NULL)
+	if (wzqarray == NULL)
 		return (NULL);
 
-	for (i = 0; i < size; i++)
+	for (wzqi = 0; wzqi < size; wzqi++)
 	{
-		for (j = 0; j < i; j++)
+		for (wzqj = 0; wzqj < wzqi; wzqj++)
 		{
-			if (array[j] == array[i])
+			if (wzqarray[wzqj] == wzqarray[wzqi])
 				break;
 		}
-		if (j == i)
+		if (wzqj == wzqi)
 		{
-			if (bst_insert(&tree, array[i]) == NULL)
+			if (bst_insert(&wzqtree, wzqarray[wzqi]) == NULL)
 				return (NULL);
 		}
 	}
 
-	return (tree);
+	return (wzqtree);
 }
