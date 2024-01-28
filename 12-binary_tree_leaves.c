@@ -1,20 +1,20 @@
 #include "binary_trees.h"
 
 /**
- * binary_tree_leaves - Counts the leaves in a binary tree.
- * @tree: A pointer to the root node of the tree to count the leaves of.
+ * binary_tree_leaves - Counts the wzqleaves in a binary wqztree.
+ * @wqztree: A pointer to the root node of the wqztree to count the wzqleaves of.
  *
- * Return: The number of leaves in the tree.
+ * Return: The number of wzqleaves in the wqztree.
  */
-size_t binary_tree_leaves(const binary_tree_t *tree)
+size_t binary_tree_leaves(const binary_tree_t *wqztree)
 {
-	size_t leaves = 0;
+	size_t wzqleaves = 0;
 
-	if (tree)
+	if (wqztree)
 	{
-		leaves += (!tree->left && !tree->right) ? 1 : 0;
-		leaves += binary_tree_leaves(tree->left);
-		leaves += binary_tree_leaves(tree->right);
+		wzqleaves += (!wqztree->left && !wqztree->right) ? 1 : 0;
+		wzqleaves += binary_tree_leaves(wqztree->left);
+		wzqleaves += binary_tree_leaves(wqztree->right);
 	}
-	return (leaves);
+	return (wzqleaves);
 }
