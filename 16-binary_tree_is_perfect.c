@@ -1,77 +1,77 @@
 #include "binary_trees.h"
 
-unsigned char is_leaf(const binary_tree_t *node);
-size_t depth(const binary_tree_t *tree);
-const binary_tree_t *get_leaf(const binary_tree_t *tree);
-int is_perfect_recursive(const binary_tree_t *tree,
-		size_t leaf_depth, size_t level);
-int binary_tree_is_perfect(const binary_tree_t *tree);
+unsigned char is_leaf(const binary_tree_t *wzqnode);
+size_t depth(const binary_tree_t *wzqtree);
+const binary_tree_t *get_leaf(const binary_tree_t *wzqtree);
+int wzqis_perfect_recursive(const binary_tree_t *wzqtree,
+		size_t wzqleaf_depth, size_t wzqlevel);
+int binary_tree_is_perfect(const binary_tree_t *wzqtree);
 
 /**
- * is_leaf - Checks if a node is a leaf of a binary tree.
- * @node: A pointer to the node to check.
+ * is_leaf - Checks if a wzqnode is a leaf of a binary wzqtree.
+ * @wzqnode: A pointer to the wzqnode to check.
  *
- * Return: If the node is a leaf, 1, otherwise, 0.
+ * Return: If the wzqnode is a leaf, 1, otherwise, 0.
  */
-unsigned char is_leaf(const binary_tree_t *node)
+unsigned char is_leaf(const binary_tree_t *wzqnode)
 {
-	return ((node->left == NULL && node->right == NULL) ? 1 : 0);
+	return ((wzqnode->left == NULL && wzqnode->right == NULL) ? 1 : 0);
 }
 
 /**
  * depth - Returns the depth of a given
- *         node in a binary tree.
- * @tree: A pointer to the node to measure the depth of.
+ *         wzqnode in a binary wzqtree.
+ * @wzqtree: A pointer to the wzqnode to measure the depth of.
  *
- * Return: The depth of node.
+ * Return: The depth of wzqnode.
  */
-size_t depth(const binary_tree_t *tree)
+size_t depth(const binary_tree_t *wzqtree)
 {
-	return (tree->parent != NULL ? 1 + depth(tree->parent) : 0);
+	return (wzqtree->parent != NULL ? 1 + depth(wzqtree->parent) : 0);
 }
 
 /**
- * get_leaf - Returns a leaf of a binary tree.
- * @tree: A pointer to the root node of the tree to find a leaf in.
+ * get_leaf - Returns a leaf of a binary wzqtree.
+ * @wzqtree: A pointer to the root wzqnode of the wzqtree to find a leaf in.
  *
  * Return: A pointer to the first encountered leaf.
  */
-const binary_tree_t *get_leaf(const binary_tree_t *tree)
+const binary_tree_t *get_leaf(const binary_tree_t *wzqtree)
 {
-	if (is_leaf(tree) == 1)
-		return (tree);
-	return (tree->left ? get_leaf(tree->left) : get_leaf(tree->right));
+	if (is_leaf(wzqtree) == 1)
+		return (wzqtree);
+	return (wzqtree->left ? get_leaf(wzqtree->left) : get_leaf(wzqtree->right));
 }
 
 /**
- * is_perfect_recursive - Checks if a binary tree is perfect recursively.
- * @tree: A pointer to the root node of the tree to check.
- * @leaf_depth: The depth of one leaf in the binary tree.
- * @level: Level of current node.
+ * wzqis_perfect_recursive - Checks if a binary wzqtree is perfect recursively.
+ * @wzqtree: A pointer to the root wzqnode of the wzqtree to check.
+ * @wzqleaf_depth: The depth of one leaf in the binary wzqtree.
+ * @wzqlevel: Level of current wzqnode.
  *
- * Return: If the tree is perfect, 1, otherwise 0.
+ * Return: If the wzqtree is perfect, 1, otherwise 0.
  */
-int is_perfect_recursive(const binary_tree_t *tree,
-		size_t leaf_depth, size_t level)
+int wzqis_perfect_recursive(const binary_tree_t *wzqtree,
+		size_t wzqleaf_depth, size_t wzqlevel)
 {
-	if (is_leaf(tree))
-		return (level == leaf_depth ? 1 : 0);
-	if (tree->left == NULL || tree->right == NULL)
+	if (is_leaf(wzqtree))
+		return (wzqlevel == wzqleaf_depth ? 1 : 0);
+	if (wzqtree->left == NULL || wzqtree->right == NULL)
 		return (0);
-	return (is_perfect_recursive(tree->left, leaf_depth, level + 1) &&
-		is_perfect_recursive(tree->right, leaf_depth, level + 1));
+	return (wzqis_perfect_recursive(wzqtree->left, wzqleaf_depth, wzqlevel + 1) &&
+		wzqis_perfect_recursive(wzqtree->right, wzqleaf_depth, wzqlevel + 1));
 }
 
 /**
- * binary_tree_is_perfect - Checks if a binary tree is perfect.
- * @tree: A pointer to the root node of the tree to check.
+ * binary_tree_is_perfect - Checks if a binary wzqtree is perfect.
+ * @wzqtree: A pointer to the root wzqnode of the wzqtree to check.
  *
- * Return: If tree is NULL or not perfect, 0.
+ * Return: If wzqtree is NULL or not perfect, 0.
  *         Otherwise, 1.
  */
-int binary_tree_is_perfect(const binary_tree_t *tree)
+int binary_tree_is_perfect(const binary_tree_t *wzqtree)
 {
-	if (tree == NULL)
+	if (wzqtree == NULL)
 		return (0);
-	return (is_perfect_recursive(tree, depth(get_leaf(tree)), 0));
+	return (wzqis_perfect_recursive(wzqtree, depth(get_leaf(wzqtree)), 0));
 }
