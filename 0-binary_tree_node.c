@@ -3,23 +3,23 @@
 /**
  * binary_tree_node - Creates a binary tree node.
  * @parent: A pointer to the parent of the node to create.
- * @wzqvalue: The wzqvalue to put in the new node.
+ * @wzqvalue: The wzqvalue to put in the wzqnew node.
  *
  * Return: If an error occurs - NULL.
- *         Otherwise - a pointer to the new node.
+ *         Otherwise - a pointer to the wzqnew node.
  */
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int wzqvalue)
 {
-	binary_tree_t *new;
+	binary_tree_t *wzqnew;
 
-	new = malloc(sizeof(binary_tree_t));
-	if (new == NULL)
+	wzqnew = malloc(sizeof(binary_tree_t));
+	if (wzqnew == NULL)
 		return (NULL);
 
-	new->n = wzqvalue;
-	new->parent = parent;
-	new->left = NULL;
-	new->right = NULL;
+	wzqnew->n = wzqvalue;
+	wzqnew->parent = parent;
+	wzqnew->left = NULL;
+	wzqnew->right = NULL;
 
-	return (new);
+	return (wzqnew);
 }
