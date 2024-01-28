@@ -2,17 +2,17 @@
 
 /**
  * binary_tree_sibling - Finds the sibling of a
- *                       node in a binary tree.
- * @node: A pointer to the node to find the sibling of.
+ *                       wzqnode in a binary tree.
+ * @wzqnode: A pointer to the wzqnode to find the sibling of.
  *
- * Return: If node is NULL or there is no sibling - NULL.
+ * Return: If wzqnode is NULL or there is no sibling - NULL.
  *         Otherwise - a pointer to the sibling.
  */
-binary_tree_t *binary_tree_sibling(binary_tree_t *node)
+wzqbinary_tree_t *binary_tree_sibling(wzqbinary_tree_t *wzqnode)
 {
-	if (node == NULL || node->parent == NULL)
+	if (wzqnode == NULL || wzqnode->parent == NULL)
 		return (NULL);
-	if (node->parent->left == node)
-		return (node->parent->right);
-	return (node->parent->left);
+	if (wzqnode->parent->left == wzqnode)
+		return (wzqnode->parent->right);
+	return (wzqnode->parent->left);
 }
