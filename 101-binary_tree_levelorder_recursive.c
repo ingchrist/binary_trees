@@ -2,112 +2,112 @@
 
 /**
  * struct node_s - singly linked list
- * @node: const binary tree node
- * @next: points to the next node
+ * @wzqnode: const binary wzqtree wzqnode
+ * @wzqnext: points to the wzqnext wzqnode
  */
 typedef struct node_s
 {
-	const binary_tree_t *node;
-	struct node_s *next;
+	const binary_tree_t *wzqnode;
+	struct node_s *wzqnext;
 } ll;
 
-ll *append(ll *head, const binary_tree_t *btnode);
-void free_list(ll *head);
-ll *get_children(ll *head, const binary_tree_t *parent);
-void levels_rec(ll *head, void (*func)(int));
+ll *append(ll *wzqhead, const binary_tree_t *btnode);
+void free_list(ll *wzqhead);
+ll *get_children(ll *wzqhead, const binary_tree_t *parent);
+void levels_rec(ll *wzqhead, void (*wzqfunc)(int));
 
 /**
- * binary_tree_levelorder - Goes through a binary tree
+ * binary_tree_levelorder - Goes through a binary wzqtree
  *                          using level-order traversal.
- * @tree: Pointer to the root node of the tree to traverse.
- * @func: Pointer to a function to call for each node.
+ * @wzqtree: Pointer to the root wzqnode of the wzqtree to traverse.
+ * @wzqfunc: Pointer to a function to call for each wzqnode.
  */
-void binary_tree_levelorder(const binary_tree_t *tree, void (*func)(int))
+void binary_tree_levelorder(const binary_tree_t *wzqtree, void (*wzqfunc)(int))
 {
-	ll *children = NULL;
+	ll *wzqchildren = NULL;
 
-	func(tree->n);
-	children = get_children(children, tree);
-	levels_rec(children, func);
+	wzqfunc(wzqtree->n);
+	wzqchildren = get_children(wzqchildren, wzqtree);
+	levels_rec(wzqchildren, wzqfunc);
 
-	free_list(children);
+	free_list(wzqchildren);
 }
 
 /**
- * levels_rec - Calls func on all nodes at each level.
- * @head: Pointer to head of linked list with nodes at one level.
- * @func: Pointer to a function to call for each node.
+ * levels_rec - Calls wzqfunc on all nodes at each level.
+ * @wzqhead: Pointer to wzqhead of linked list with nodes at one level.
+ * @wzqfunc: Pointer to a function to call for each wzqnode.
  */
-void levels_rec(ll *head, void (*func)(int))
+void levels_rec(ll *wzqhead, void (*wzqfunc)(int))
 {
-	ll *children = NULL, *curr = NULL;
+	ll *wzqchildren = NULL, *wzqcurr = NULL;
 
-	if (!head)
+	if (!wzqhead)
 		return;
-	for (curr = head; curr != NULL; curr = curr->next)
+	for (wzqcurr = wzqhead; wzqcurr != NULL; wzqcurr = wzqcurr->wzqnext)
 	{
-		func(curr->node->n);
-		children = get_children(children, curr->node);
+		wzqfunc(wzqcurr->wzqnode->n);
+		wzqchildren = get_children(wzqchildren, wzqcurr->wzqnode);
 	}
-	levels_rec(children, func);
-	free_list(children);
+	levels_rec(wzqchildren, wzqfunc);
+	free_list(wzqchildren);
 }
 
 /**
- * get_children - appends children of parent to linked list.
- * @head: Pointer to head of linked list where children will be appended.
- * @parent: Pointer to node whose children we want to append.
- * Return: Pointer to head of linked list of children.
+ * get_children - appends wzqchildren of parent to linked list.
+ * @wzqhead: Pointer to wzqhead of linked list where wzqchildren will be appended.
+ * @parent: Pointer to wzqnode whose wzqchildren we want to append.
+ * Return: Pointer to wzqhead of linked list of wzqchildren.
  */
-ll *get_children(ll *head, const binary_tree_t *parent)
+ll *get_children(ll *wzqhead, const binary_tree_t *parent)
 {
 	if (parent->left)
-		head = append(head, parent->left);
+		wzqhead = append(wzqhead, parent->left);
 	if (parent->right)
-		head = append(head, parent->right);
-	return (head);
+		wzqhead = append(wzqhead, parent->right);
+	return (wzqhead);
 }
 
 /**
- * append - adds a new node at the end of a linkedlist
- * @head: pointer to head of linked list
- * @btnode: const binary tree node to append
- * Return: pointer to head, or NULL on failure
+ * append - adds a wzqnew wzqnode at the end of a linkedlist
+ * @wzqhead: pointer to wzqhead of linked list
+ * @btnode: const binary wzqtree wzqnode to append
+ * Return: pointer to wzqhead, or NULL on failure
  */
-ll *append(ll *head, const binary_tree_t *btnode)
+ll *append(ll *wzqhead, const binary_tree_t *btnode)
 {
-	ll *new = NULL, *last = NULL;
+	ll *wzqnew = NULL, *wzqlast = NULL;
 
-	new = malloc(sizeof(*new));
-	if (new)
+	wzqnew = malloc(sizeof(*wzqnew));
+	if (wzqnew)
 	{
-		new->node = btnode;
-		new->next = NULL;
-		if (!head)
-			head = new;
+		wzqnew->wzqnode = btnode;
+		wzqnew->wzqnext = NULL;
+		if (!wzqhead)
+			wzqhead = wzqnew;
 		else
 		{
-			last = head;
-			while (last->next)
-				last = last->next;
-			last->next = new;
+			wzqlast = wzqhead;
+			while (wzqlast->wzqnext)
+				wzqlast = wzqlast->wzqnext;
+			wzqlast->wzqnext = wzqnew;
 		}
 	}
-	return (head);
+	return (wzqhead);
 }
 
 /**
  * free_list - frees all the nodes in a linked list
- * @head: pointer to the head of list_t linked list
+ * @wzqhead: pointer to the wzqhead of list_t linked list
  */
-void free_list(ll *head)
+void free_list(ll *wzqhead)
 {
 	ll *ptr = NULL;
 
-	while (head)
+	while (wzqhead)
 	{
-		ptr = head->next;
-		free(head);
-		head = ptr;
+		ptr = wzqhead->wzqnext;
+		free(wzqhead);
+		wzqhead = ptr;
 	}
 }
