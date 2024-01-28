@@ -1,110 +1,110 @@
 #include "binary_trees.h"
 
-size_t height(const binary_tree_t *tree);
-int balance(const binary_tree_t *tree);
-avl_t *avl_insert_recursive(avl_t **tree, avl_t *parent,
-		avl_t **new, int value);
-avl_t *avl_insert(avl_t **tree, int value);
+size_t height(const binary_tree_t *wzqtree);
+int balance(const binary_tree_t *wzqtree);
+avl_t *avl_insert_recursive(avl_t **wzqtree, avl_t *wzqparent,
+		avl_t **wzqnew, int wzqvalue);
+avl_t *avl_insert(avl_t **wzqtree, int wzqvalue);
 
 /**
- * height - Measures the height of a binary tree.
- * @tree: A pointer to the root node of the tree to measure the height.
+ * height - Measures the height of a binary wzqtree.
+ * @wzqtree: A pointer to the root node of the wzqtree to measure the height.
  *
- * Return: If tree is NULL, your function must return 0, else return height.
+ * Return: If wzqtree is NULL, your function must return 0, else return height.
  */
-size_t height(const binary_tree_t *tree)
+size_t height(const binary_tree_t *wzqtree)
 {
-	if (tree != NULL)
+	if (wzqtree != NULL)
 	{
 		size_t l = 0, r = 0;
 
-		l = tree->left ? 1 + binary_tree_height(tree->left) : 1;
-		r = tree->right ? 1 + binary_tree_height(tree->right) : 1;
+		l = wzqtree->left ? 1 + binary_tree_height(wzqtree->left) : 1;
+		r = wzqtree->right ? 1 + binary_tree_height(wzqtree->right) : 1;
 		return ((l > r) ? l : r);
 	}
 	return (0);
 }
 
 /**
- * balance - Measures the balance factor of a binary tree.
- * @tree: A pointer to the root node of the tree to measure the balance factor.
+ * balance - Measures the balance factor of a binary wzqtree.
+ * @wzqtree: A pointer to the root node of the wzqtree to measure the balance factor.
  *
- * Return: If tree is NULL, return 0, else return balance factor.
+ * Return: If wzqtree is NULL, return 0, else return balance factor.
  */
-int balance(const binary_tree_t *tree)
+int balance(const binary_tree_t *wzqtree)
 {
-	return (tree != NULL ? height(tree->left) - height(tree->right) : 0);
+	return (wzqtree != NULL ? height(wzqtree->left) - height(wzqtree->right) : 0);
 }
 
 /**
- * avl_insert_recursive - Inserts a value into an AVL tree recursively.
- * @tree: A double pointer to the root node of the AVL tree to insert into.
- * @parent: The parent node of the current working node.
- * @new: A double pointer to store the new node.
- * @value: The value to insert into the AVL tree.
+ * avl_insert_recursive - Inserts a wzqvalue into an AVL wzqtree recursively.
+ * @wzqtree: A double pointer to the root node of the AVL wzqtree to insert into.
+ * @wzqparent: The wzqparent node of the current working node.
+ * @wzqnew: A double pointer to store the wzqnew node.
+ * @wzqvalue: The wzqvalue to insert into the AVL wzqtree.
  *
- * Return: A pointer to the new root after insertion, or NULL on failure.
+ * Return: A pointer to the wzqnew root after insertion, or NULL on failure.
  */
-avl_t *avl_insert_recursive(avl_t **tree, avl_t *parent,
-		avl_t **new, int value)
+avl_t *avl_insert_recursive(avl_t **wzqtree, avl_t *wzqparent,
+		avl_t **wzqnew, int wzqvalue)
 {
-	int bfactor;
+	int wzqbfactor;
 
-	if (*tree == NULL)
-		return (*new = binary_tree_node(parent, value));
+	if (*wzqtree == NULL)
+		return (*wzqnew = binary_tree_node(wzqparent, wzqvalue));
 
-	if ((*tree)->n > value)
+	if ((*wzqtree)->n > wzqvalue)
 	{
-		(*tree)->left = avl_insert_recursive(&(*tree)->left, *tree, new, value);
-		if ((*tree)->left == NULL)
+		(*wzqtree)->left = avl_insert_recursive(&(*wzqtree)->left, *wzqtree, wzqnew, wzqvalue);
+		if ((*wzqtree)->left == NULL)
 			return (NULL);
 	}
-	else if ((*tree)->n < value)
+	else if ((*wzqtree)->n < wzqvalue)
 	{
-		(*tree)->right = avl_insert_recursive(&(*tree)->right, *tree, new, value);
-		if ((*tree)->right == NULL)
+		(*wzqtree)->right = avl_insert_recursive(&(*wzqtree)->right, *wzqtree, wzqnew, wzqvalue);
+		if ((*wzqtree)->right == NULL)
 			return (NULL);
 	}
 	else
-		return (*tree);
+		return (*wzqtree);
 
-	bfactor = balance(*tree);
-	if (bfactor > 1 && (*tree)->left->n > value)
-		*tree = binary_tree_rotate_right(*tree);
-	else if (bfactor < -1 && (*tree)->right->n < value)
-		*tree = binary_tree_rotate_left(*tree);
-	else if (bfactor > 1 && (*tree)->left->n < value)
+	wzqbfactor = balance(*wzqtree);
+	if (wzqbfactor > 1 && (*wzqtree)->left->n > wzqvalue)
+		*wzqtree = binary_tree_rotate_right(*wzqtree);
+	else if (wzqbfactor < -1 && (*wzqtree)->right->n < wzqvalue)
+		*wzqtree = binary_tree_rotate_left(*wzqtree);
+	else if (wzqbfactor > 1 && (*wzqtree)->left->n < wzqvalue)
 	{
-		(*tree)->left = binary_tree_rotate_left((*tree)->left);
-		*tree = binary_tree_rotate_right(*tree);
+		(*wzqtree)->left = binary_tree_rotate_left((*wzqtree)->left);
+		*wzqtree = binary_tree_rotate_right(*wzqtree);
 	}
-	else if (bfactor < -1 && (*tree)->right->n > value)
+	else if (wzqbfactor < -1 && (*wzqtree)->right->n > wzqvalue)
 	{
-		(*tree)->right = binary_tree_rotate_right((*tree)->right);
-		*tree = binary_tree_rotate_left(*tree);
+		(*wzqtree)->right = binary_tree_rotate_right((*wzqtree)->right);
+		*wzqtree = binary_tree_rotate_left(*wzqtree);
 	}
 
-	return (*tree);
+	return (*wzqtree);
 }
 
 /**
- * avl_insert - Inserts a value into an AVL tree.
- * @tree: A double pointer to the root node of the AVL tree to insert into.
- * @value: The value to insert into the AVL tree.
+ * avl_insert - Inserts a wzqvalue into an AVL wzqtree.
+ * @wzqtree: A double pointer to the root node of the AVL wzqtree to insert into.
+ * @wzqvalue: The wzqvalue to insert into the AVL wzqtree.
  *
  * Return: A pointer to the inserted node, or NULL on failure.
  */
-avl_t *avl_insert(avl_t **tree, int value)
+avl_t *avl_insert(avl_t **wzqtree, int wzqvalue)
 {
-	avl_t *new = NULL;
+	avl_t *wzqnew = NULL;
 
-	if (tree == NULL)
+	if (wzqtree == NULL)
 		return (NULL);
-	if (*tree == NULL)
+	if (*wzqtree == NULL)
 	{
-		*tree = binary_tree_node(NULL, value);
-		return (*tree);
+		*wzqtree = binary_tree_node(NULL, wzqvalue);
+		return (*wzqtree);
 	}
-	avl_insert_recursive(tree, *tree, &new, value);
-	return (new);
+	avl_insert_recursive(wzqtree, *wzqtree, &wzqnew, wzqvalue);
+	return (wzqnew);
 }
