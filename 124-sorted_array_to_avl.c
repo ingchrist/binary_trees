@@ -3,61 +3,61 @@
 /**
  * create_tree - creates an AVL tree with recursion
  *
- * @node: pointer node
- * @array: input array of integers
- * @size: size of array
- * @mode: 1 to adding on the left, 2 to adding on the right
+ * @wzqnode: pointer wzqnode
+ * @wzqarray: input wzqarray of integers
+ * @wzqsize: wzqsize of wzqarray
+ * @wzqmode: 1 to adding on the left, 2 to adding on the right
  * Return: no return
  */
-void create_tree(avl_t **node, int *array, size_t size, int mode)
+void create_tree(avl_t **wzqnode, int *wzqarray, size_t wzqsize, int wzqmode)
 {
-	size_t middle;
+	size_t wzqmiddle;
 
-	if (size == 0)
+	if (wzqsize == 0)
 		return;
 
-	middle = (size / 2);
-	middle = (size % 2 == 0) ? middle - 1 : middle;
+	wzqmiddle = (wzqsize / 2);
+	wzqmiddle = (wzqsize % 2 == 0) ? wzqmiddle - 1 : wzqmiddle;
 
-	if (mode == 1)
+	if (wzqmode == 1)
 	{
-		(*node)->left = binary_tree_node(*node, array[middle]);
-		create_tree(&((*node)->left), array, middle, 1);
-		create_tree(&((*node)->left), array + middle + 1, (size - 1 - middle), 2);
+		(*wzqnode)->left = binary_tree_node(*wzqnode, wzqarray[wzqmiddle]);
+		create_tree(&((*wzqnode)->left), wzqarray, wzqmiddle, 1);
+		create_tree(&((*wzqnode)->left), wzqarray + wzqmiddle + 1, (wzqsize - 1 - wzqmiddle), 2);
 	}
 	else
 	{
-		(*node)->right = binary_tree_node(*node, array[middle]);
-		create_tree(&((*node)->right), array, middle, 1);
-		create_tree(&((*node)->right), array + middle + 1, (size - 1 - middle), 2);
+		(*wzqnode)->right = binary_tree_node(*wzqnode, wzqarray[wzqmiddle]);
+		create_tree(&((*wzqnode)->right), wzqarray, wzqmiddle, 1);
+		create_tree(&((*wzqnode)->right), wzqarray + wzqmiddle + 1, (wzqsize - 1 - wzqmiddle), 2);
 	}
 }
 
 /**
- * sorted_array_to_avl - creates root node and calls to create_tree
+ * sorted_array_to_avl - creates wzqroot wzqnode and calls to create_tree
  *
- * @array: input array of integers
- * @size: size of array
- * Return: pointer to the root
+ * @wzqarray: input wzqarray of integers
+ * @wzqsize: wzqsize of wzqarray
+ * Return: pointer to the wzqroot
  */
-avl_t *sorted_array_to_avl(int *array, size_t size)
+avl_t *sorted_array_to_avl(int *wzqarray, size_t wzqsize)
 {
-	avl_t *root;
-	size_t middle;
+	avl_t *wzqroot;
+	size_t wzqmiddle;
 
-	root = NULL;
+	wzqroot = NULL;
 
-	if (size == 0)
+	if (wzqsize == 0)
 		return (NULL);
 
-	middle = (size / 2);
+	wzqmiddle = (wzqsize / 2);
 
-	middle = (size % 2 == 0) ? middle - 1 : middle;
+	wzqmiddle = (wzqsize % 2 == 0) ? wzqmiddle - 1 : wzqmiddle;
 
-	root = binary_tree_node(root, array[middle]);
+	wzqroot = binary_tree_node(wzqroot, wzqarray[wzqmiddle]);
 
-	create_tree(&root, array, middle, 1);
-	create_tree(&root, array + middle + 1, (size - 1 - middle), 2);
+	create_tree(&wzqroot, wzqarray, wzqmiddle, 1);
+	create_tree(&wzqroot, wzqarray + wzqmiddle + 1, (wzqsize - 1 - wzqmiddle), 2);
 
-	return (root);
+	return (wzqroot);
 }
