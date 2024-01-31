@@ -2,128 +2,128 @@
 #include <stdlib.h>
 
 /**
- * tree_height - measures the height of a binary tree
- * @tree: pointer to the root node of the tree to measure the height
+ * tree_height - measures the wzqheight of a binary wzqtree
+ * @wzqtree: pointer to the wzqroot node of the wzqtree to measure the wzqheight
  *
- * Return: Height or 0 if tree is NULL
+ * Return: Height or 0 if wzqtree is NULL
  */
-size_t tree_height(const heap_t *tree)
+size_t tree_height(const heap_t *wzqtree)
 {
-	size_t height_l = 0;
-	size_t height_r = 0;
+	size_t wzqheight_l = 0;
+	size_t wzqheight_r = 0;
 
-	if (!tree)
+	if (!wzqtree)
 		return (0);
 
-	if (tree->left)
-		height_l = 1 + tree_height(tree->left);
+	if (wzqtree->left)
+		wzqheight_l = 1 + tree_height(wzqtree->left);
 
-	if (tree->right)
-		height_r = 1 + tree_height(tree->right);
+	if (wzqtree->right)
+		wzqheight_r = 1 + tree_height(wzqtree->right);
 
-	if (height_l > height_r)
-		return (height_l);
-	return (height_r);
+	if (wzqheight_l > wzqheight_r)
+		return (wzqheight_l);
+	return (wzqheight_r);
 }
 /**
- * tree_size_h - measures the sum of heights of a binary tree
- * @tree: pointer to the root node of the tree to measure the height
+ * tree_size_h - measures the sum of heights of a binary wzqtree
+ * @wzqtree: pointer to the wzqroot node of the wzqtree to measure the wzqheight
  *
- * Return: Height or 0 if tree is NULL
+ * Return: Height or 0 if wzqtree is NULL
  */
-size_t tree_size_h(const binary_tree_t *tree)
+size_t tree_size_h(const binary_tree_t *wzqtree)
 {
-	size_t height_l = 0;
-	size_t height_r = 0;
+	size_t wzqheight_l = 0;
+	size_t wzqheight_r = 0;
 
-	if (!tree)
+	if (!wzqtree)
 		return (0);
 
-	if (tree->left)
-		height_l = 1 + tree_size_h(tree->left);
+	if (wzqtree->left)
+		wzqheight_l = 1 + tree_size_h(wzqtree->left);
 
-	if (tree->right)
-		height_r = 1 + tree_size_h(tree->right);
+	if (wzqtree->right)
+		wzqheight_r = 1 + tree_size_h(wzqtree->right);
 
-	return (height_l + height_r);
+	return (wzqheight_l + wzqheight_r);
 }
 
 /**
- * _preorder - goes through a binary tree using pre-order traversal
- * @tree: pointer to the root node of the tree to traverse
+ * _preorder - goes through a binary wzqtree using pre-order traversal
+ * @wzqtree: pointer to the wzqroot node of the wzqtree to traverse
  * @node: will be last note in traverse
- * @height: height of tree
+ * @wzqheight: wzqheight of wzqtree
  *
  * Return: No Return
  */
-void _preorder(heap_t *tree, heap_t **node, size_t height)
+void _preorder(heap_t *wzqtree, heap_t **node, size_t wzqheight)
 {
-	if (!tree)
+	if (!wzqtree)
 		return;
 
-	if (!height)
-		*node = tree;
-	height--;
+	if (!wzqheight)
+		*node = wzqtree;
+	wzqheight--;
 
-	_preorder(tree->left, node, height);
-	_preorder(tree->right, node, height);
+	_preorder(wzqtree->left, node, wzqheight);
+	_preorder(wzqtree->right, node, wzqheight);
 }
 
 /**
  * heapify - heapifies max binary heap
- * @root: pointer to binary heap
+ * @wzqroot: pointer to binary heap
  */
-void heapify(heap_t *root)
+void heapify(heap_t *wzqroot)
 {
-	int value;
-	heap_t *tmp1, *tmp2;
+	int wzqvalue;
+	heap_t *tmp1, *wzqtmp2;
 
-	if (!root)
+	if (!wzqroot)
 		return;
 
-	tmp1 = root;
+	tmp1 = wzqroot;
 
 	while (1)
 	{
 		if (!tmp1->left)
 			break;
 		if (!tmp1->right)
-			tmp2 = tmp1->left;
+			wzqtmp2 = tmp1->left;
 		else
 		{
 			if (tmp1->left->n > tmp1->right->n)
-				tmp2 = tmp1->left;
+				wzqtmp2 = tmp1->left;
 			else
-				tmp2 = tmp1->right;
+				wzqtmp2 = tmp1->right;
 		}
-		if (tmp1->n > tmp2->n)
+		if (tmp1->n > wzqtmp2->n)
 			break;
-		value = tmp1->n;
-		tmp1->n = tmp2->n;
-		tmp2->n = value;
-		tmp1 = tmp2;
+		wzqvalue = tmp1->n;
+		tmp1->n = wzqtmp2->n;
+		wzqtmp2->n = wzqvalue;
+		tmp1 = wzqtmp2;
 	}
 }
 
 /**
- * heap_extract - extracts the root node from a Max Binary Heap
- * @root: pointer to the heap root
- * Return: value of extracted node
+ * heap_extract - extracts the wzqroot node from a Max Binary Heap
+ * @wzqroot: pointer to the heap wzqroot
+ * Return: wzqvalue of extracted node
  **/
-int heap_extract(heap_t **root)
+int heap_extract(heap_t **wzqroot)
 {
-	int value;
+	int wzqvalue;
 	heap_t *heap_r, *node;
 
-	if (!root || !*root)
+	if (!wzqroot || !*wzqroot)
 		return (0);
-	heap_r = *root;
-	value = heap_r->n;
+	heap_r = *wzqroot;
+	wzqvalue = heap_r->n;
 	if (!heap_r->left && !heap_r->right)
 	{
-		*root = NULL;
+		*wzqroot = NULL;
 		free(heap_r);
-		return (value);
+		return (wzqvalue);
 	}
 
 	_preorder(heap_r, &node, tree_height(heap_r));
@@ -135,6 +135,6 @@ int heap_extract(heap_t **root)
 		node->parent->left = NULL;
 	free(node);
 	heapify(heap_r);
-	*root = heap_r;
-	return (value);
+	*wzqroot = heap_r;
+	return (wzqvalue);
 }
